@@ -6,11 +6,15 @@ const app = express()
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 
-const articleControllerClass = require('./controllers/article');
-const articleController = new articleControllerClass()
+const articleRoutes = require('./routes/articles')
+app.use('/article', articleRoutes)
 
-const articleRoutes = require('./routes/articles');
-app.use('/', articleRoutes);
+const authorRoutes = require('./routes/authors')
+app.use('/author', authorRoutes)
+
+app.listen(3000, function() {
+    console.log('App listening on port 3000!');
+});
 
 // const express = require('express');
 // const app = express();
@@ -37,7 +41,3 @@ app.use('/', articleRoutes);
 // app.use('/', articleRoutes)
 // app.use('/article', articleRoutes)
 // app.use('/author', articleRoutes)
-
-app.listen(3000, function() {
-    console.log('App listening on port 3000!');
-});
